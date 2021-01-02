@@ -1,7 +1,7 @@
 use crate::crawler;
 use crate::dm::{models, DbManager};
-use crate::utils::users;
 use crate::fm::FileManager;
+use crate::utils::users;
 use chrono::prelude::*;
 use chrono::{Duration, Local};
 use clap::Clap;

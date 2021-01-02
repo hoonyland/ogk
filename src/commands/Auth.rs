@@ -1,5 +1,6 @@
 use crate::client;
 use crate::utils::auth::{AuthConfig, AuthUser};
+use crate::vars::MAIN_AUTHOR;
 use clap::Clap;
 use serde::{Deserialize, Serialize};
 use std::error::Error;
@@ -7,8 +8,6 @@ use std::fs::{create_dir_all, File, OpenOptions};
 use std::io;
 use std::io::prelude::*;
 use std::path::Path;
-
-const MAIN_AUTHOR: &str = "Hoony <hoonyland@protonmail>";
 
 #[derive(Clap, Debug)]
 struct LoginOpts {

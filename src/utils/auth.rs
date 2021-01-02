@@ -5,7 +5,6 @@ use std::fs::{create_dir_all, read_to_string, File, OpenOptions};
 use std::io;
 use std::io::prelude::*;
 use std::path::Path;
-use toml::Value;
 
 #[derive(Debug, Deserialize, Serialize)]
 pub struct AuthConfig {

@@ -8,13 +8,14 @@ extern crate toml;
 mod client;
 mod commands;
 mod dm;
+mod vars;
 // mod fm;
 mod utils;
 
 // use chrono::prelude::*;
 // use chrono::{Duration, Local};
 use clap::Clap;
-use commands::{Auth, Fetch, Init};
+use commands::{Auth, Config, Fetch, Init};
 // use diesel::prelude::*;
 // use dm::{models, DbManager};
 // use fm::FileManager;
@@ -34,6 +35,7 @@ enum SubCommand {
     #[clap(version = "0.1", author = MAIN_AUTHOR)]
     Fetch(Fetch::Opts),
     Init(Init::Opts),
+    Config(Config::Opts),
 }
 
 #[derive(Clap)]
@@ -50,6 +52,9 @@ async fn main() -> Result<(), Box<dyn Error>> {
     match opts.subcmd {
         SubCommand::Auth(opts) => {
             let _ = Auth::run(opts).await;
+        }
+        SubCommand::Config(opts) => {
+            let _ = Config::run(opts).await;
         }
         SubCommand::Fetch(opts) => {
             let _ = Fetch::run(opts).await;

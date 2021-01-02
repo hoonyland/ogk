@@ -10,12 +10,24 @@ API Server 및 CLI 의 형태로 [정보공개플랫폼](https://open.go.kr) 계
 ogk help
 ```
 
-#### 0. 인증하기
+#### 0-1. 인증하기
 ```bash
 # username, password 이 성공적으로 인증되면
 # $HOME/.ogk/credentials 파일에 toml 포맷으로 저장됩니다.
 # 이후 open.go.kr API 통신이 필요한 경우 자동으로 저장된 사용자 정보를 활용합니다.
 ogk auth login --username <username> --password <password>
+```
+
+#### 0-2. 설정하기
+```bash
+# 정보공개청구 후 전달받은 파일을 관리할 Github Repository
+ogk config repository --file <repository-url-for-files>
+
+# 정보공개청구 내역을 저장하고 관리할 Database 정보
+ogk config database --host <db-host> --username <db-username> --password <db-password>
+
+# 설정 확인하기
+ogk config list
 ```
 
 #### 1. 조회하기
