@@ -26,7 +26,17 @@ pub struct Opts {
 async fn fetch_bill(bill_id: &str) -> Result<(), Box<dyn Error>> {
   let client = client::Client::new();
   client.auth_from_storage().await?;
-  println!("success");
+
+  let _response = client
+    .as_ref()
+    .fetch_a_bill(bill_id, bill_id, bill_id)
+    .await?;
+
+  if let Some(response) = _response {
+    let pretty_response = serde_json::to_string_pretty(&response)?;
+    io::stdout(pretty_response.as_bytes())?;
+  }
+
   Ok(())
 }
 
@@ -48,8 +58,8 @@ async fn fetch_bills(
     .fetch_bills(page, from_date, &to_date)
     .await?;
 
-  let formatted_output = format!("{:?}", response);
-  io::stdout(formatted_output.as_bytes())?;
+  let pretty_response = serde_json::to_string_pretty(&response)?;
+  io::stdout(pretty_response.as_bytes())?;
 
   Ok(())
 }

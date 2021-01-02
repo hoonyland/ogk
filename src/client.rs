@@ -59,12 +59,12 @@ pub struct AuthResponse {
   pub modelAndView: AuthResponseModelAndView,
 }
 
-#[derive(serde::Deserialize, Debug)]
+#[derive(serde::Deserialize, serde::Serialize, Debug)]
 pub struct ListVo {
   pub totalPage: i32, // 아이템 전체 개수
 }
 
-#[derive(serde::Deserialize, Debug)]
+#[derive(serde::Deserialize, serde::Serialize, Debug)]
 pub struct DtlVo {
   pub clsdrResnCn: String,        // 비공개내용
   pub decsnCn: String,            // 공개내용 ex)
@@ -88,7 +88,7 @@ pub struct DtlVo {
   pub rqestSj: String,            // 요청 제목 ex) 최저임금 위원회 회의록 및 속기록 (JE)
 }
 
-#[derive(serde::Deserialize, Debug)]
+#[derive(serde::Deserialize, serde::Serialize, Debug)]
 pub struct DntcFile {
   pub atchmnflByteCo: String,     // '100081',
   pub atchmnflPrsrvNm: String,    // '202007171546284220000.zip',
@@ -100,14 +100,14 @@ pub struct DntcFile {
   pub uploadFileOrginlNm: String, // ex) '서범수 의원 요구자료 일체.zip',
 }
 
-#[derive(serde::Deserialize, Debug)]
+#[derive(serde::Deserialize, serde::Serialize, Debug)]
 pub struct BillWithFiles {
   pub atchFileList: Option<Vec<DntcFile>>,
   pub dntcFileList: Option<Vec<DntcFile>>,
   pub dtlVo: DtlVo,
 }
 
-#[derive(serde::Deserialize, Debug)]
+#[derive(serde::Deserialize, serde::Serialize, Debug)]
 pub struct Bills {
   pub list: Vec<DtlVo>,
   pub vo: ListVo,
@@ -156,7 +156,6 @@ impl Client {
     username: &str,
     password: &str,
   ) -> Result<(), Box<dyn std::error::Error>> {
-    println!("{}, {}", username, password);
     let auth: [(&str, &str); 3] = [("mberId", username), ("pwd", password), ("agent", "PC")];
     let response = self.client.post(LOGIN_HOST).form(&auth).send().await?;
     match response.json::<AuthResponse>().await {
