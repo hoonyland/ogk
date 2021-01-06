@@ -1,5 +1,5 @@
+use dirs::home_dir;
 use serde::{Deserialize, Serialize};
-use std::env::home_dir;
 use std::error::Error;
 use std::fs::{create_dir_all, read_to_string, File, OpenOptions};
 use std::io;

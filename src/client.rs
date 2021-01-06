@@ -1,6 +1,7 @@
 #![allow(non_snake_case)]
 
 use crate::dm::models::Bill;
+use crate::fm::{Downloadable, FileManager};
 use crate::utils::auth::AuthConfig;
 use bytes::Bytes;
 use chrono::prelude::*;
@@ -107,6 +108,20 @@ pub struct BillWithFiles {
   pub dtlVo: DtlVo,
 }
 
+impl Downloadable for BillWithFiles {
+  fn get_filename(&self, orig_file_name: &str) -> String {
+    FileManager::make_filename(
+      &self.dtlVo.rqestProcRegstrNo.trim(),
+      &self.dtlVo.insttRqestProcStNm.trim(),
+      orig_file_name.trim(),
+    )
+  }
+
+  fn get_dirname(&self) -> String {
+    FileManager::make_dirname(&self.dtlVo.rceptDt.trim(), &self.dtlVo.rqestSj.trim())
+  }
+}
+
 #[derive(serde::Deserialize, serde::Serialize, Debug)]
 pub struct Bills {
   pub list: Vec<DtlVo>,
@@ -180,19 +195,17 @@ impl Client {
     Ok(())
   }
 
-  // pub async fn download_file(
-  //   &self,
-  //   file: &DntcFile,
-  // ) -> impl futures::Future<Output = Bytes, Error> {
-  //   let params = &[("fileUploadNo", &file.fileUploadNo)];
-  //   self
-  //     .client
-  //     .post(DOWNLOAD_HOST)
-  //     .form(params)
-  //     .send()
-  //     .await?
-  //     .bytes()
-  // }
+  pub async fn download_file(&self, file_upload_no: &str) -> Result<Bytes, Error> {
+    let params = &[("fileUploadNo", &file_upload_no)];
+    self
+      .client
+      .post(DOWNLOAD_HOST)
+      .form(params)
+      .send()
+      .await?
+      .bytes()
+      .await
+  }
 
   pub async fn post(&self, url: &str, form: &[(&str, &str)]) -> Result<Response, Error> {
     self.client.post(url).form(form).send().await

@@ -35,6 +35,14 @@ ogk config list
 - 단건 조회하기
 ```bash
 ogk fetch --bill-id <bill-id>
+
+# 청구파일 저장 옵션
+ogk fetch --bill-id <bill-id> --download
+
+# 청구 결과 예쁘게 보기 
+ogk fetch --bill-id <bill-id> | jq .
+ogk fetch --bill-id <bill-id> | jq .dtlVo
+ogk fetch --bill-id <bill-id> | jq .dtlVo.rceptDt
 ```
 
 - 복수건 조회하기(날짜 조회)

@@ -8,9 +8,9 @@ extern crate toml;
 mod client;
 mod commands;
 mod dm;
-mod vars;
-// mod fm;
+mod fm;
 mod utils;
+mod vars;
 
 // use chrono::prelude::*;
 // use chrono::{Duration, Local};
