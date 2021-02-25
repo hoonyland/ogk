@@ -1,0 +1,3 @@
+DROP TABLE bills;
+DROP TABLE files;
+DROP TABLE users;
