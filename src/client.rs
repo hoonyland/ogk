@@ -69,16 +69,22 @@ pub struct ListVo {
 pub struct DtlVo {
   pub clsdrResnCn: String,        // 비공개내용
   pub decsnCn: String,            // 공개내용 ex)
+  pub insttAddr: String,          // 처리기관 주소
   pub insttRqestProcStCd: String, // 처리상태 코드 ex) 143
   pub insttRqestProcStNm: String, // 처리상태명 ex) 공개완료
   pub mberId: String,             // 사용자이름 // ex) opengirok
   pub nticeDt: String,            // 처리일자 ex) 2020.07.27
   pub othbcDtApnResnNm: String,   // 공개일시 지정 사유 ex) 수수료납부 완료후 바로 공개
   pub othbcSeNm: String,          // 공개여부 ex) 공개
+  pub opetrCbleTelno: String,     // 처리기관 전화번호
+  pub opetrDeptNm: String,        // 처리기관 처리과 이름
+  pub opetrClsfNm: String,        // 처리기관 처리자 직위/직급
   pub prcsFullInsttNm: String,    // 처리기관 이름 full ver ex) 고용노동부 최저임금위원회
   pub prcsInsttCd: String,        // 처리기관 코드 ex) 1492865
   pub prcsInsttNm: String,        // ex) 처리기관 이름 short ver. - 최저임금위원회
+  pub procDt: String,             // 통지 일자
   pub procRegstrNo: String,       // * 세부 페이지 요청에 필요한 번호
+  pub procUserEmailAdres: String, // 처리자 전자우편
   pub rceptDt: String,            // 접수일자 ex)  2020.09.12
   pub rqestCn: String,            // 청구내용 ex)
   pub rqestFullInsttNm: String,   // ex) 요청기관 이름 full ver. - 고용노동부 최저임금위원회

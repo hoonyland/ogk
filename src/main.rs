@@ -9,6 +9,7 @@ mod client;
 mod commands;
 mod dm;
 mod fm;
+mod schema;
 mod utils;
 mod vars;
 
