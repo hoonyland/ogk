@@ -1,5 +1,6 @@
 pub mod models;
-pub mod scheme;
+
+extern crate diesel;
 
 use crate::client::{DntcFile, DtlVo};
 use bcrypt::{hash, DEFAULT_COST};
@@ -10,10 +11,6 @@ use diesel::{insert_into, update};
 use dotenv::dotenv;
 use std::env;
 use std::error::Error;
-
-use scheme::bills::dsl as bills_dsl;
-use scheme::files::dsl as files_dsl;
-use scheme::users::dsl as users_dsl;
 
 pub struct DbManager {
     pub conn: MysqlConnection,
