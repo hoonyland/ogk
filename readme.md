@@ -18,17 +18,30 @@ ogk help
 ogk auth login --username <username> --password <password>
 ```
 
-#### 0-2. 설정하기
+#### 0-2. 기본 설정하기
 ```bash
 # 정보공개청구 후 전달받은 파일을 관리할 Github Repository
 ogk config repository --file <repository-url-for-files>
 
-# 정보공개청구 내역을 저장하고 관리할 Database 정보
-ogk config database --host <db-host> --username <db-username> --password <db-password>
 
 # 설정 확인하기
 ogk config list
 ```
+
+#### 0-3. Database 설정하기(선택)
+```bash
+# .env 에 database URL 저장
+touch .env
+
+# migration
+# diesel_cli 설치 참조 (https://diesel.rs/guides/getting-started/)
+cargo install diesel_cli --no-default-features --features mysql
+diesel migration run
+
+# 정보공개청구 내역을 저장하고 관리할 Database 정보
+ogk config database --host <db-host> --username <db-username> --password <db-password>
+```
+
 
 #### 1. 조회하기
 
